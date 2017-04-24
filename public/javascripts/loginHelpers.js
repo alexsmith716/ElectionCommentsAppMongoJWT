@@ -172,14 +172,14 @@ var helper = {
 
                         if (data.response === 'success') {
 
-                            console.log('>>> loginForm >>> 1: ', data)
+                            console.log('>>> loginForm > success > success: ', data)
 
-                            // localStorage.getItem('token')
-                            //location.href = data.redirect;
+                            //window.localStorage.setItem('token', data.token);
+                            //var token = window.localStorage.getItem('token')
+                            var redirect = data.redirect+'?token='+data.token
+                            location.href = redirect;
 
                         } else {
-
-                            console.log('>>> loginForm >>> 2: ', data)
 
                             if(data.validatedData){
                                 $('#loginForm .form-control').addClass('has-error');
@@ -196,8 +196,6 @@ var helper = {
                     },
 
                     error: function(xhr, status, error) {
-
-                        console.log('>>> loginForm >>> 3: ', xhr)
 
                         var parsedXHR = JSON.parse(xhr.responseText);
 

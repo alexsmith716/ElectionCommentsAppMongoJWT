@@ -128,11 +128,12 @@ app.use(function (req, res, next) {
   // console.log('REQ.originalUrl ++: ', req.originalUrl)
   // console.log('REQ.headers.referer ++: ', req.headers['referer'])
   // console.log('REQ.headers.user-agent ++: ', req.headers['user-agent'])
-  console.log('REQ.headers ++: ', req.headers)
-  console.log('REQ.token ++: ', req.token)
+  //console.log('REQ.headers ++: ', req.headers)
+  console.log('REQ.query ++: ', req.query)
+  console.log('REQ.query.token ++: ', req.query.token)
   // console.log('REQ.session ++: ', req.session)
   // console.log('REQ.sessionID ++: ', req.sessionID)
-  console.log('REQ.user ++: ', req.user)
+  // console.log('REQ.user ++: ', req.user)
   req.user ? console.log('REQ.user._id: ', req.user._id) : null
   // console.log('REQ.query ++: ', req.query)
   // console.log('REQ.body ++: ', req.body)
@@ -222,12 +223,12 @@ if (app.get('env') === 'development') {
     app.locals.notifyErrorMessageReferer = req.headers['referer']
     res.locals.resLocalsBasicView = 'ResLocalsBasicView!!'
 
-    console.log('DEV ERROR code: ', err.code)
-    console.log('DEV ERROR status: ', err.status)
-    console.log('DEV ERROR name: ', err.name)
-    console.log('DEV ERROR message: ', err.message)
-    console.log('DEV ERROR xhr: ', req.xhr)
-    console.log('DEV ERR: ', err)
+    // console.log('DEV ERROR code: ', err.code)
+    // console.log('DEV ERROR status: ', err.status)
+    // console.log('DEV ERROR name: ', err.name)
+    // console.log('DEV ERROR message: ', err.message)
+    // console.log('DEV ERROR xhr: ', req.xhr)
+    // console.log('DEV ERR: ', err)
 
     req.logout()
 
