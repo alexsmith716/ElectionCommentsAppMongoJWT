@@ -149,6 +149,7 @@ module.exports.getIndex = function(req, res, next){
 
 
 module.exports.getUserHome = function(req, res){
+  console.log('+++++++++ SERVER CONTROLLER > module.exports.getUserHome ++++++++++')
 
   res.render('userHome');
 

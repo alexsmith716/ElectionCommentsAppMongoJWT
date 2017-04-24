@@ -116,6 +116,11 @@ userSchema.methods.generateJwt = function() {
     _id: this._id,
     email: this.email,
     displayname: this.displayname,
+    firstname: this.firstname,
+    lastname: this.lastname,
+    city: this.city,
+    state: this.state,
+    previouslogin: this.previouslogin,
     exp: parseInt(expire.getTime() / 1000),
   }, process.env.JWT_SECRET);
 };

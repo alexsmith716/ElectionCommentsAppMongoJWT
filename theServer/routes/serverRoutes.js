@@ -8,10 +8,12 @@ var serverControllers = require('../controller/serverMainCtrls');
 var authC              = require('../../shared/auth');
 var csrfProtection 		= csrf({ cookie: true });
 var jwt = require('express-jwt');
-var auth = jwt({
-  secret: process.env.JWT_SECRET,
-  userProperty: 'payload'
+
+router.use(function(req, res, next) {
+  console.log('+++++++++++++ SERVER ROUTES ++++++++++++')
+  next();
 });
+
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -37,19 +39,39 @@ router.get('/notifyerror', serverControllers.getNotifyError);
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-router.get('/userhome', auth, serverControllers.getUserHome);
+//router.get('/userhome', serverControllers.getUserHome);
 
-router.get('/membersonly', auth, serverControllers.getMembersOnly);
+router.get('/membersonly', serverControllers.getMembersOnly);
 
-router.get('/comments', auth, csrfProtection, serverControllers.getComments);
+router.get('/comments', csrfProtection, serverControllers.getComments);
 
-router.post('/comments/maincomment', auth, csrfProtection, serverControllers.postMainComment);
+router.post('/comments/maincomment', csrfProtection, serverControllers.postMainComment);
 
-router.post('/comments/subcomment/:subcommentid', auth, csrfProtection, serverControllers.postSubComment);
+router.post('/comments/subcomment/:subcommentid', csrfProtection, serverControllers.postSubComment);
 
-router.get('/userprofile', auth, csrfProtection, authC.noCache, serverControllers.getUserProfile);
+router.get('/userprofile', csrfProtection, authC.noCache, serverControllers.getUserProfile);
 
-router.get('/logout', auth, serverControllers.getLogout);
+router.get('/logout', serverControllers.getLogout);
+
+router.use(jwt({
+  secret: process.env.JWT_SECRET,
+  credentialsRequired: false,
+  getToken: function fromHeaderOrQuerystring (req) {
+    if (req.query && req.query.token) {
+      return req.query.token
+    }
+    return null
+  }
+}),function(req, res, next){
+	console.log('++++++++ SERVER ROUTES > getToken > req.user: ', req.user)
+	console.log('++++++++ SERVER ROUTES > getToken > req.method: ', req.method)
+	console.log('++++++++ SERVER ROUTES > getToken > req.url: ', req.url)
+  res.locals.currentUser = req.user
+	next()
+})
+
+
+router.get('/userhome', serverControllers.getUserHome)
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

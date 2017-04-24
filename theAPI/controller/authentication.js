@@ -98,7 +98,7 @@ module.exports.ajaxSignUpUser = function(req, res, next){
             } else {
 
               token = user.generateJwt();
-              sendJSONresponse(res, 201, { 'response': 'success', 'redirect': 'https://localhost:3000/payload?'+token });
+              sendJSONresponse(res, 201, { 'response': 'success', 'token': token, 'redirect': 'https://localhost:3000/userhome' });
 
               /*
               passport.authenticate('local', function(err, user, info){
