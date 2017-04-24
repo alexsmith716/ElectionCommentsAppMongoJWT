@@ -1,0 +1,93 @@
+extends layout
+
+block metas
+
+block title
+  title Notify Error
+  
+block links
+
+block headScripts
+
+block bodyScripts
+
+block content
+
+  .main
+
+    .container
+
+      .row
+      
+        .col-lg-10.col-centered
+
+          .panel-body
+
+            - if(title != undefined)
+              h3= title
+
+            - if (message != undefined)
+
+              if(type === 'success')
+                .alert.alert-success(role="alert") #{message}
+
+              if(type === 'warning')
+                .alert.alert-warning(role="alert") #{message}
+
+              if(type === 'danger')
+                .alert.alert-danger(role="alert") #{message}
+
+
+            p If this problem continues, please contact our Help Desk at 555-555-1234 or email customer.care@ThisGreatApp.com. Visit our
+              |&nbsp;
+              a.highlight(href='/customerservice') Customer Service
+              |&nbsp;webpage for a full listing of helpful information.
+
+            br
+
+            p Please
+              |&nbsp;
+              a.highlight(href='/') visit our homepage
+              |&nbsp;or&nbsp;
+              a.highlight(href='/login') Log In
+              |&nbsp;or&nbsp;
+              a.highlight(href='/signup') Sign Up
+              |&nbsp;to start using Election App 2016.
+
+
+            br
+            hr
+            br
+
+
+            - if( notifyErrorMessageObject )
+              - var appError = `${notifyErrorMessageObject}`
+              - var appErrorName = `${notifyErrorMessageObject.name}`
+              - var appErrorMessage = `${notifyErrorMessageObject.appErrorStack}`
+              - var appErrorStatus = `${notifyErrorMessageObject.status}`
+              - var appErrorCode = `${notifyErrorMessageObject.code}`
+              - var appErrorStack = `${notifyErrorMessageObject.stack}`
+
+
+            - if( notifyErrorMessageObject )
+              pre
+                | Error: #{`${notifyErrorMessageObject}`}
+                |
+                | Name: #{`${notifyErrorMessageObject.name}`}
+                |
+                | Message: #{appErrorMessage}
+                |
+                | Status: #{appErrorStatus}
+                |
+                | Code: #{appErrorCode}
+                |
+                | Xhr: #{notifyErrorMessageReqXhr}
+                |
+                | Referer: #{notifyErrorMessageReferer}
+                |
+                | Stack: #{appErrorStack}
+
+
+
+
+

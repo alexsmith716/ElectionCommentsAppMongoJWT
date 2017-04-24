@@ -1,0 +1,56 @@
+extends layout
+
+block metas
+
+block title
+  title= title
+  
+block links
+
+block headScripts
+
+block bodyScripts
+
+block content
+
+  .main
+
+    .container
+
+      .row
+
+        .col-lg-9.col-md-10.col-sm-11.col-xs-12.col-centered
+
+          .panel-body
+
+            h3= header
+
+            br
+
+            - if ( resLocalsBasicView )
+              p #{resLocalsBasicView}
+              p= resLocalsBasicView
+              
+
+            p !{(content).replace(/\n/g, '<br/>')}
+
+
+            p Please
+              |&nbsp;
+              a.highlight(href='/') visit our homepage
+              |&nbsp;or&nbsp;
+              a.highlight(href='/login') Log In
+              |&nbsp;or&nbsp;
+              a.highlight(href='/signup') Sign Up
+              |&nbsp;to use Election App 2017.
+
+
+            p Contact
+              | 
+              a.highlight(href='/customerservice') Customer Service
+              |&nbsp;for questions and comments.
+
+
+
+
+
